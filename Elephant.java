@@ -9,6 +9,30 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Elephant extends Actor
 {
     GreenfootSound elephantSound = new GreenfootSound("elephant-trumpets-growls-6047.mp3");
+    GreenfootImage[] idle = new GreenfootImage[8];
+    
+    /**
+     * Constructor - THe code that gets run one time when object is created
+     */
+    
+    public Elephant()
+    {
+        for (int i = 0; i< idle.length; i++)
+        {
+            idle[i] = new GreenfootImage("images/elephant_idle/idle" + i);
+        }
+        setImage(idle[0]);
+    }
+    /**
+     * Animate the elephant
+     */
+    int ImageIndex = 0;
+    public void animateElephant()
+    {
+        setImage(idle[ImageIndex]);
+        ImageIndex = (ImageIndex + 1) % idle.length;
+    }
+    
     public void act()
     {
         // Add your action code here.
@@ -24,6 +48,9 @@ public class Elephant extends Actor
         }
         
         eat();
+        
+        //Animate the elephant 
+        animateElephant();
     }
     
     public void eat()
